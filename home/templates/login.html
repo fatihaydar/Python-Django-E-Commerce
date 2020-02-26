@@ -1,0 +1,25 @@
+{% extends "homebase.html" %}
+{% block title %} Giriş Yap {% endblock %}
+{% block body %}
+
+<section class="contact-section">
+		<div  class="container">
+			<div class="row">
+				<div class="col-lg-6 contact-info">
+					<h3>Giriş Yap</h3>
+                    {% if hata %}
+                    Login hatası:{{ hata }}
+                    {% endif %}
+					<form class="contact-form" action="" method="POST">
+                        {% csrf_token %}
+						<input type="text" name="username" placeholder="Username" required>
+						<input type="password" name="password" placeholder="Password" required>
+						<input type="hidden" value="{{request.GET.next}}" name="next">
+						<button type="submit" class="site-btn">Giriş Yap</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

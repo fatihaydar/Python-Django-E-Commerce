@@ -1,0 +1,30 @@
+
+
+{% extends "homebase.html" %}
+
+
+
+{% block body %}
+
+    <<!-- Page info -->
+	<div class="page-top-info">
+		<div class="container">
+			<h2>HAKKIMIZDA</h2>
+            <br>
+            <br>
+            {% for rs in settings %}
+            <p>{{ rs.hakkimizda }}</p>
+            {% endfor %}
+		</div>
+	</div>
+	<!-- Page info end -->
+
+<!-- Page info -->
+	<!--<div class="page-top-info">-->
+		<!--<div class="container">-->
+            <!--{% for rs in pagedetail %}-->
+                <!--{{ rs.detailtwo|safe }}-->
+            <!--{% endfor %}-->
+		<!--</div>-->
+	<!--</div>-->
+{% endblock %}

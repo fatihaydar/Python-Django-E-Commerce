@@ -1,0 +1,208 @@
+
+{% extends "homebase.html" %}
+{% block title %}{{ product.title }}{% endblock %}
+{% block keywords %}{{ product.keywords }}{% endblock %}
+{% block description %}{{ product.description }}{% endblock %}
+
+
+{% block body %}
+
+<!-- Page info -->
+	<div class="page-top-info">
+		<div class="container">
+			<h4>Ürün Detayları</h4>
+			<div class="site-pagination">
+				<a href="/urunler">{{ product.category }}</a> /
+				<a href="/urunler">{{ product.title }}</a>
+			</div>
+		</div>
+	</div>
+	<!-- Page info end -->
+
+
+	<!-- product section -->
+	<section class="product-section">
+		<div class="container">
+			<div class="back-link">
+				<a href="/urunler"> &lt;&lt; Alışverişe dön</a>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="product-pic-zoom">
+						<img class="product-big-img" src="{{ product.image.url }}" alt="">
+					</div>
+					<div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
+						<div class="product-thumbs-track">
+							<div class="pt active" data-imgbigurl="{{ product.image.url }}"><img src="{{ product.image.url }}" alt=""></div>
+							{% for rs in productimage %}
+							<div class="pt" data-imgbigurl="{{ rs.image.url }}"><img src="{{ rs.image.url }}" alt=""></div>
+							{% endfor %}
+						</div>
+					</div>
+					<br> <br>
+					<h2>Yorum Yaz</h2>
+					<form class="contact-form" method="post" action="/addcomment/{{product.id}}">
+						{% csrf_token %}
+						<input type="text" name="subject" placeholder="Subject" required>
+						<textarea name="message" placeholder="Message" required></textarea>
+						<button type="submit" class="site-btn">Gönder</button>
+					</form>
+				</div>
+				<div class="col-lg-6 product-details">
+					<h2 class="p-title">{{ product.title }}</h2>
+					<h3 class="p-price">{{ product.price }}₺</h3>
+					<!--<h4 class="p-stock">Mevcut: <span>Stokta var</span></h4>-->
+
+
+
+{% if messages %}
+			{% for message in messages %}
+			<div class="alert alert-{{message.tags}}" role="alert">
+				{{message}}
+			</div>
+			{% endfor %}
+			{% endif %}
+					<form action="/order/addtocart/{{ product.id }}" method="post">
+						{% csrf_token %}
+					<div class="quantity">
+						<p>Adet</p>
+                        <div class="pro-qty"><input type="number" name="quantity" value="1" min="1" max="{{product.amount}}"></div>
+                    </div>
+					<button type="submit" class="site-btn">Sepete Ekle</button>
+					</form>
+
+
+
+					<div id="accordion" class="accordion-area">
+						<div class="panel">
+							<div class="panel-header" id="headingOne">
+								<button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Açıklama</button>
+							</div>
+							<div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+								<div class="panel-body">
+									<p>{{ product.detail|safe }}</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel">
+							<div class="panel-header" id="headingTwo">
+								<button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Yorumlar</button>
+							</div>
+							<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+								<div class="panel-body">
+
+									<img src="./img/cards.png" alt="">
+									{% for rs in comments %}
+									<h5>Kullanıcı Adı : {{ rs.user.first_name }} </h5> <h6> Tarih :{{ rs.create_at }}</h6>
+									<p>{{ rs.message }}</p>
+									<br>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+						<div class="panel">
+							<div class="panel-header" id="headingThree">
+								<button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Kargo & İade</button>
+							</div>
+							<div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+								<div class="panel-body">
+									<h4>7 gün içerisinde iade edilebilir.</h4>
+									<p>Teslimatta ödeme mevcuttur.<br>Testlim süresi <span>3 - 4 iş günüdür</span></p>
+									<p>Ürünlerimizi güvenle satın alabilirsiniz. Satış öncesi ve sonrası hizmetlerlerde en iyi deneyimi sunmaktayız.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="social-sharing">
+						<a href=""><i class="fa fa-google-plus"></i></a>
+						<a href=""><i class="fa fa-pinterest"></i></a>
+						<a href=""><i class="fa fa-facebook"></i></a>
+						<a href=""><i class="fa fa-twitter"></i></a>
+						<a href=""><i class="fa fa-youtube"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- product section end -->
+
+
+	<!-- RELATED PRODUCTS section -->
+	<!--<section class="related-product-section">-->
+		<!--<div class="container">-->
+			<!--<div class="section-title">-->
+				<!--<h2>RELATED PRODUCTS</h2>-->
+			<!--</div>-->
+			<!--<div class="product-slider owl-carousel">-->
+				<!--<div class="product-item">-->
+					<!--<div class="pi-pic">-->
+						<!--<img src="./img/product/1.jpg" alt="">-->
+						<!--<div class="pi-links">-->
+							<!--<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>-->
+							<!--<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="pi-text">-->
+						<!--<h6>$35,00</h6>-->
+						<!--<p>Flamboyant Pink Top </p>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="product-item">-->
+					<!--<div class="pi-pic">-->
+						<!--<div class="tag-new">New</div>-->
+						<!--<img src="./img/product/2.jpg" alt="">-->
+						<!--<div class="pi-links">-->
+							<!--<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>-->
+							<!--<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="pi-text">-->
+						<!--<h6>$35,00</h6>-->
+						<!--<p>Black and White Stripes Dress</p>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="product-item">-->
+					<!--<div class="pi-pic">-->
+						<!--<img src="./img/product/3.jpg" alt="">-->
+						<!--<div class="pi-links">-->
+							<!--<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>-->
+							<!--<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="pi-text">-->
+						<!--<h6>$35,00</h6>-->
+						<!--<p>Flamboyant Pink Top </p>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="product-item">-->
+						<!--<div class="pi-pic">-->
+							<!--<img src="./img/product/4.jpg" alt="">-->
+							<!--<div class="pi-links">-->
+								<!--<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>-->
+								<!--<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>-->
+							<!--</div>-->
+						<!--</div>-->
+						<!--<div class="pi-text">-->
+							<!--<h6>$35,00</h6>-->
+							<!--<p>Flamboyant Pink Top </p>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--<div class="product-item">-->
+					<!--<div class="pi-pic">-->
+						<!--<img src="./img/product/6.jpg" alt="">-->
+						<!--<div class="pi-links">-->
+							<!--<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>-->
+							<!--<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="pi-text">-->
+						<!--<h6>$35,00</h6>-->
+						<!--<p>Flamboyant Pink Top </p>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</section>-->
+	<!-- RELATED PRODUCTS section end -->
+
+{% endblock %}

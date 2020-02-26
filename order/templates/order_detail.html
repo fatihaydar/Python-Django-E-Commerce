@@ -1,0 +1,155 @@
+
+
+{% extends "homebase.html" %}
+
+
+
+{% block body %}
+
+  	<!-- Page info -->
+	<div class="page-top-info">
+		<div class="container">
+
+			<div class="site-pagination">
+				<a href="/">Anasayfa</a> /
+				<a href="/shopcart">Order Detail</a>
+			</div>
+		</div>
+	</div>
+	<!-- Page info end -->
+
+
+	<!-- Contact section -->
+	<section class="cart-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 card-right">
+					<div class="filter-widget">
+						<h2 class="fw-title">Kullanıcı Menüsü</h2>
+						<ul class="category-menu">
+							<li><a href="/">Anasayfa</a></li>
+							<li><a href="/order/profil">Profilim</a></li>
+							<li><a href="/order/shopcart">Sepetim</a></li>
+							<li><a href="/order">Siparişlerim</a></li>
+							<li><a href="/comments">Yorumlarım</a></li>
+							<li><a href="/logout">Çıkış</a></li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-lg-8">
+					<div class="cart-table">
+						<h3>Order Detail</h3>
+						<div class="cart-table-warp" tabindex="1" style="overflow: hidden; outline: none;">
+							<table>
+							<thead>
+								<tr>
+						<th> Name </th>
+						<td style="margin-bottom:300px"> {{order.name}}</td>
+
+					</tr>
+					<tr>
+						<th> SurName </th>
+						<td> {{order.surname}}</td>
+
+					</tr>
+					<tr>
+						<th> Address </th>
+						<td> {{order.address}}</td>
+
+					</tr>
+					<tr>
+						<th> City </th>
+						<td> {{order.city}}</td>
+
+					</tr>
+					<tr>
+						<th> Phone </th>
+						<td> {{order.phone}}</td>
+
+					</tr>
+					<tr>
+						<th> Date </th>
+						<td> {{order.create_at}}</td>
+
+					</tr>
+					<tr>
+						<th> Note </th>
+						<td> {{order.note}}</td>
+
+					</tr>
+					<tr>
+						<th> Status </th>
+						<td > {{order.status}}</td>
+
+					</tr>
+							</thead>
+
+						</table>
+
+
+						</div>
+
+
+					</div>
+					<br>
+					<br>
+					<br>
+					<div class="cart-table">
+						<h3>Your Cart</h3>
+						<div class="cart-table-warp" tabindex="1" style="overflow: hidden; outline: none;">
+							<table>
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th class="product-th">Product</th>
+									<th class="quy-th">Quantity</th>
+									<th class="total-th">Price</th>
+									<th class="amount">Amount</th>
+									<th class="amount">{{carttotal}}</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for rs in items %}
+								<tr>
+									<td>{{ rs.id }}</td>
+									<td class="product-col">
+										<img src="{{rs.product.image.url}}" alt="">
+										<div class="pc-title">
+											<h4>{{ rs.product.title }}</h4>
+										</div>
+									</td>
+									<td class="quy-col">
+										<div class="quantity">
+					                       {{ rs.quantity }}
+                    					</div>
+									</td>
+									<td class="size-col"><h4>{{ rs.product.price }} TL</h4></td>
+									<td class="total-col"><h4>{{ rs.total }}</h4></td>
+
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+<br>
+<br>
+	<!-- Contact section end -->
+
+<!-- Page info -->
+	<!--<div class="page-top-info">-->
+		<!--<div class="container">-->
+            <!--{% for rs in pagedetail %}-->
+                <!--{{ rs.detailtwo|safe }}-->
+            <!--{% endfor %}-->
+		<!--</div>-->
+	<!--</div>-->
+{% endblock %}

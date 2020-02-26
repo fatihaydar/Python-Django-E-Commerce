@@ -1,0 +1,32 @@
+{% load static %}
+
+<!-- Hero section -->
+	<section class="hero-section">
+		<div class="hero-slider owl-carousel">
+
+			{% for rs in productlatest %}
+			<div class="hs-item set-bg" data-setbg=" '{{ rs.image.url }}'">
+				<!--<p style="color:blue">{{rs.image.url}}</p>-->
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-6 col-lg-7 text-white">
+							<!--<span style="color:black">{{ rs.title }}</span>-->
+							<h2 style="color:grey" >{{ rs.title }}</h2>
+							<!--<p>{{ rs.description }} </p>-->
+							<a href="/detail/{{ rs.id }}"  class="site-btn">Göster</a>
+						</div>
+					</div>
+					<div class="offer-card text-white">
+						<span></span>
+						<h2>{{ rs.price }}</h2>
+						<p>Şimdi Al</p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="container">
+			<div class="slide-num-holder" id="snh-1"></div>
+		</div>
+	</section>
+	<!-- Hero section end -->

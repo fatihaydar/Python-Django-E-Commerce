@@ -1,0 +1,68 @@
+{% extends "homebase.html" %}
+
+{% block body %}
+<section class="checkout-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 order-2 order-lg-1">
+					<form  method="POST" name="order" class="checkout-form">
+						{%csrf_token%}
+						<div class="cf-title">Billing Address</div>
+						<div class="row">
+
+
+						</div>
+						<div class="row address-inputs">
+							<div class="col-md-12">
+								<input type="text" name="name" value="{{ user.first_name }}" placeholder="Name">
+								<input type="text" name="surname" value="{{ user.last_name }}" placeholder="Surname">
+								<input type="text" name="address" placeholder="Address">
+								<input type="text" name="city" placeholder="City">
+								<input type="text" name="phone" placeholder="Telephone">
+							</div>
+
+						</div>
+						<div class="cf-title">Credit Cart Details</div>
+						<div class="row shipping-btns">
+							<div class="col-md-12">
+								<input type="text" placeholder="Cart Holder Name">
+								<input type="text" placeholder="Cart Number">
+								<input type="text" placeholder="Date mm/yy">
+								<input type="text" placeholder="Code">
+								<input type="text" placeholder="Order Total:$8100.0">
+							</div>
+
+						</div>
+
+						<button type="submit" class="site-btn submit-order-btn">Complete Order</button>
+					</form>
+				</div>
+				<div class="col-lg-4 order-1 order-lg-2">
+					<div class="checkout-cart">
+						<h3>ShopCart</h3>
+						<ul class="product-list">
+							{% for rs in shopcart %}
+							<li>
+
+
+								<div class="pl-thumb"><img src="{{ rs.product.image.url }}" alt=""></div>
+								<h6>{{ rs.product.title }}</h6>
+
+								<p>{{ rs.product.price }} TL</p>
+
+							</li>
+							{%endfor%}
+						</ul>
+						<ul class="price-list">
+
+
+							<li class="total">Total<span>{{ carttotal }}TL</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- checkout section end -->
+
+{% endblock %}

@@ -1,0 +1,68 @@
+
+
+
+{% block keywords %} {% endblock %}
+{% block description %} {% endblock %}
+
+
+{% block body %}
+<!-- Page info -->
+	<div class="page-top-info">
+		<div class="container">
+			<h4>Ürünler</h4>
+		</div>
+	</div>
+	<!-- Page info end -->
+	<!-- Category section -->
+	<section class="category-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 order-2 order-lg-1">
+					<div class="filter-widget">
+						<h2 class="fw-title">Kategoriler</h2>
+						<ul class="category-menu">
+
+
+
+                            {% for rs in category %}
+                                <li><a href="category/{{ rs.id }}">{{ rs.title }}</a></li>
+                            {% endfor %}
+
+
+
+
+
+						</ul>
+					</div>
+
+				</div>
+
+				<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
+					<div class="row">
+
+
+
+                        {% for rs in products %}
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+{#									<div class="tag-sale">Satışta</div>#}
+									<img src="{{ rs.image.url }}"  alt="">
+									<div class="pi-links">
+										<a href="/detail/{{ rs.id }}" class="add-card"><i class="flaticon-bag"></i><span>Ürüne Git</span></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									 <h6>{{ rs.price }}₺</h6>
+                                     <p >{{ rs.title }}</p>
+								</div>
+							</div>
+						</div>
+                        {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Category section end -->
+{% endblock %}

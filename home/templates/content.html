@@ -1,0 +1,86 @@
+
+
+
+	<!-- letest product section -->
+	<section class="top-letest-product-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>Son Eklenen Ürünler</h2>
+			</div>
+
+			<div class="product-slider owl-carousel">
+				{% for rs in productlatest %}
+				<div class="product-item">
+					<div class="pi-pic">
+					<a href="/detail/{{ rs.id }}" >	<img width="296" height="236" src="{{ rs.image.url }}" alt="{{ rs.title }}"></a>
+						<div class="pi-links">
+							<a href="/detail/{{ rs.id }}" class="add-card"><i class="flaticon-bag"></i><span>Ürüne Git</span></a>
+							<a href="/detail/{{ rs.id }}" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						</div>
+					</div>
+					<div class="pi-text">
+						<h6>{{ rs.price }}</h6>
+						<p>{{ rs.title }} </p>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+	</section>
+	<!-- letest product section end -->
+
+
+
+	<!-- Product filter section -->
+	<section class="product-filter-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>En Çok Satın Alınanlar</h2>
+			</div>
+
+			<div class="row">
+				{% for rs in producttop %}
+				<div class="col-lg-3 col-sm-6">
+
+					<div class="product-item">
+						<div class="pi-pic">
+						<a href="/detail/{{ rs.id }}"><img src="{{ rs.image.url }}" alt=""></a>
+							<div class="pi-links">
+								<a href="/detail/{{ rs.id }}" class="add-card"><i class="flaticon-bag"></i><span>Ürüne git</span></a>
+								<a href="/detail/{{ rs.id }}" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6>{{ rs.price }}</h6>
+							<p>{{ rs.title }}</p>
+						</div>
+					</div>
+
+				</div>
+				{% endfor %}
+
+			</div>
+			<div class="text-center pt-5">
+
+			</div>
+		</div>
+	</section>
+	<!-- Product filter section end -->
+
+
+	<!-- Banner section -->
+	<section class="banner-section">
+		<div class="container">
+			{% for rs in productone %}
+		<a href="/detail/{{ rs.id }}">	<div class="banner set-bg" data-setbg="{{ rs.image.url }}">
+				<div class="tag-new">Fırsat</div>
+				<span>Fırsat Ürünü</span>
+				<h2>{{ rs.title }}</h2>
+				<a href="/detail/{{ rs.id }}" class="site-btn">Ürüne Git</a>
+			</div></a>
+
+			{% endfor   %}
+		</div>
+	</section>
+	<!-- Banner section end  -->
